@@ -108,6 +108,12 @@ public class DisplayWeather extends AppCompatActivity {
                            System.out.println("Error To Load API Request");
                        }
                    });
+
+
+                   SharedPreferences sharedPreferences = getSharedPreferences(Shared,MODE_PRIVATE);
+                   SharedPreferences.Editor editor =sharedPreferences.edit();
+                   editor.putString(TEXT ,city.getText().toString());
+                   editor.apply();
                } else if (Data.length > 1) {
                    Call<Change> call = gerritAPI.GetResponse2((Data[1]), (Data[2]), APIKey, units);
                    call.enqueue(new Callback<Change>() {
@@ -144,10 +150,7 @@ public class DisplayWeather extends AppCompatActivity {
                 });
                lastUpdate.setText("Last update:"+formatter.format(date));
 
-               SharedPreferences sharedPreferences = getSharedPreferences(Shared,MODE_PRIVATE);
-               SharedPreferences.Editor editor =sharedPreferences.edit();
-               editor.putString(TEXT ,city.getText().toString());
-               editor.apply();
+
            }
 
     }
